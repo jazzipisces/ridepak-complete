@@ -1,0 +1,106 @@
+{
+  "name": "ridedriver-app",
+  "version": "1.0.0",
+  "private": true,
+  "homepage": "https://ridedriver.app",
+  "description": "Professional ride-hailing driver application for managing rides, earnings, and navigation",
+  "keywords": ["ride-hailing", "driver", "transportation", "pwa", "react"],
+  "author": {
+    "name": "RideDriver Team",
+    "email": "dev@ridedriver.app",
+    "url": "https://ridedriver.app"
+  },
+  "license": "MIT",
+  "dependencies": {
+    "@testing-library/jest-dom": "^5.17.0",
+    "@testing-library/react": "^13.4.0",
+    "@testing-library/user-event": "^14.5.2",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "react-scripts": "5.0.1",
+    "react-router-dom": "^6.15.0",
+    "axios": "^1.5.0",
+    "socket.io-client": "^4.7.2",
+    "leaflet": "^1.9.4",
+    "react-leaflet": "^4.2.1",
+    "date-fns": "^2.30.0",
+    "react-hot-toast": "^2.4.1",
+    "framer-motion": "^10.16.4",
+    "react-query": "^3.39.3",
+    "zustand": "^4.4.1",
+    "react-hook-form": "^7.45.4",
+    "yup": "^1.2.0",
+    "@hookform/resolvers": "^3.2.0",
+    "react-intersection-observer": "^9.5.2",
+    "workbox-window": "^7.0.0",
+    "dexie": "^3.2.4",
+    "react-helmet-async": "^1.3.0",
+    "react-use-gesture": "^9.1.3",
+    "recharts": "^2.8.0",
+    "lucide-react": "^0.263.1"
+  },
+  "devDependencies": {
+    "@types/leaflet": "^1.9.4",
+    "eslint": "^8.48.0",
+    "eslint-plugin-react": "^7.33.2",
+    "eslint-plugin-react-hooks": "^4.6.0",
+    "prettier": "^3.0.2",
+    "husky": "^8.0.3",
+    "lint-staged": "^14.0.1",
+    "cross-env": "^7.0.3",
+    "serve": "^14.2.1",
+    "workbox-cli": "^7.0.0"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "lint": "eslint src --ext .js,.jsx,.ts,.tsx",
+    "lint:fix": "eslint src --ext .js,.jsx,.ts,.tsx --fix",
+    "format": "prettier --write src/**/*.{js,jsx,ts,tsx,json,css,md}",
+    "analyze": "npm run build && npx serve -s build",
+    "build:pwa": "npm run build && workbox generateSW workbox-config.js",
+    "serve": "serve -s build -l 3000",
+    "test:coverage": "npm test -- --coverage --watchAll=false",
+    "prepare": "husky install"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "engines": {
+    "node": ">=16.0.0",
+    "npm": ">=8.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/ridedriver/driver-app.git"
+  },
+  "bugs": {
+    "url": "https://github.com/ridedriver/driver-app/issues"
+  },
+  "lint-staged": {
+    "src/**/*.{js,jsx,ts,tsx}": [
+      "eslint --fix",
+      "prettier --write"
+    ],
+    "src/**/*.{json,css,md}": [
+      "prettier --write"
+    ]
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged",
+      "pre-push": "npm run test:coverage"
+    }
+  }
+}

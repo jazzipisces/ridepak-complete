@@ -1,0 +1,14 @@
+
+# https://www.robotstxt.org/robotstxt.html
+User-agent: *
+Disallow: /admin/
+Disallow: /api/
+Disallow: /driver-documents/
+Disallow: /private/
+Allow: /
+
+# Sitemap
+Sitemap: https://ridedriver.app/sitemap.xml
+
+# Crawl delay
+Crawl-delay: 1
