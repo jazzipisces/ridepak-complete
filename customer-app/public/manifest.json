@@ -1,0 +1,125 @@
+{
+  "short_name": "PakRide",
+  "name": "PakRide - Customer App",
+  "description": "Pakistan's Premier Ride Hailing App - Book rides, cargo services, and rentals across Pakistan",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "64x64 32x32 24x24 16x16",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "logo192.png",
+      "type": "image/png",
+      "sizes": "192x192"
+    },
+    {
+      "src": "logo512.png",
+      "type": "image/png",
+      "sizes": "512x512"
+    },
+    {
+      "src": "maskable-icon-192.png",
+      "type": "image/png",
+      "sizes": "192x192",
+      "purpose": "maskable"
+    },
+    {
+      "src": "maskable-icon-512.png",
+      "type": "image/png",
+      "sizes": "512x512",
+      "purpose": "maskable"
+    },
+    {
+      "src": "apple-touch-icon.png",
+      "type": "image/png",
+      "sizes": "180x180"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#16a34a",
+  "background_color": "#ffffff",
+  "orientation": "portrait-primary",
+  "scope": "/",
+  "lang": "en-US",
+  "dir": "ltr",
+  "categories": ["transportation", "travel", "business"],
+  "shortcuts": [
+    {
+      "name": "Book Ride",
+      "short_name": "Book",
+      "description": "Quick ride booking",
+      "url": "/?action=book-ride",
+      "icons": [
+        {
+          "src": "icons/shortcut-ride.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "Track Ride",
+      "short_name": "Track",
+      "description": "Track current ride",
+      "url": "/?action=track-ride",
+      "icons": [
+        {
+          "src": "icons/shortcut-track.png",
+          "sizes": "96x96"
+        }
+      ]
+    },
+    {
+      "name": "My Wallet",
+      "short_name": "Wallet",
+      "description": "View wallet balance",
+      "url": "/wallet",
+      "icons": [
+        {
+          "src": "icons/shortcut-wallet.png",
+          "sizes": "96x96"
+        }
+      ]
+    }
+  ],
+  "screenshots": [
+    {
+      "src": "screenshots/home-mobile.png",
+      "type": "image/png",
+      "sizes": "320x640",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "screenshots/booking-mobile.png",
+      "type": "image/png",
+      "sizes": "320x640",
+      "form_factor": "narrow"
+    },
+    {
+      "src": "screenshots/home-desktop.png",
+      "type": "image/png",
+      "sizes": "1280x720",
+      "form_factor": "wide"
+    }
+  ],
+  "related_applications": [
+    {
+      "platform": "play",
+      "url": "https://play.google.com/store/apps/details?id=com.pakride.customer",
+      "id": "com.pakride.customer"
+    },
+    {
+      "platform": "ios",
+      "url": "https://apps.apple.com/app/pakride-customer/id123456789"
+    }
+  ],
+  "prefer_related_applications": false,
+  "display_override": ["window-controls-overlay", "standalone", "minimal-ui", "browser"],
+  "edge_side_panel": {
+    "preferred_width": 400
+  },
+  "launch_handler": {
+    "client_mode": "navigate-existing"
+  }
+}

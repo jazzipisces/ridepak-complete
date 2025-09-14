@@ -1,0 +1,10 @@
+# robots.txt for PakRide Customer App
+
+# Allow all web crawlers
+User-agent: *
+Allow: /
+
+# Specific rules for major search engines
+User-agent: Googlebot
+Allow: /
+Crawl-

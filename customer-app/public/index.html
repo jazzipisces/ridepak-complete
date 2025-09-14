@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="icon" href="%PUBLIC_URL%/favicon.ico" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="theme-color" content="#16a34a" />
+    <meta name="description" content="PakRide - Pakistan's Premier Ride Hailing App. Book rides, cargo services, and daily rentals across all of Pakistan including Punjab, Sindh, KPK, Balochistan, Gilgit-Baltistan, and Azad Kashmir." />
+    <meta name="keywords" content="Pakistan taxi, ride hailing Pakistan, PakRide, taxi app Pakistan, intercity travel Pakistan, cargo delivery Pakistan, car rental Pakistan" />
+    <meta name="author" content="PakRide Technologies" />
+    
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://customer.pakride.com/" />
+    <meta property="og:title" content="PakRide - Customer App" />
+    <meta property="og:description" content="Book rides, cargo services, and rentals across Pakistan with PakRide" />
+    <meta property="og:image" content="%PUBLIC_URL%/og-image.png" />
+    
+    <!-- Twitter -->
+    <meta property="twitter:card" content="summary_large_image" />
+    <meta property="twitter:url" content="https://customer.pakride.com/" />
+    <meta property="twitter:title" content="PakRide - Customer App" />
+    <meta property="twitter:description" content="Book rides, cargo services, and rentals across Pakistan with PakRide" />
+    <meta property="twitter:image" content="%PUBLIC_URL%/twitter-image.png" />
+    
+    <!-- Apple Meta Tags -->
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="default" />
+    <meta name="apple-mobile-web-app-title" content="PakRide" />
+    <link rel="apple-touch-icon" href="%PUBLIC_URL%/apple-touch-icon.png" />
+    
+    <!-- Microsoft Tags -->
+    <meta name="msapplication-TileColor" content="#16a34a" />
+    <meta name="msapplication-config" content="%PUBLIC_URL%/browserconfig.xml" />
+    
+    <!-- Manifest and Icons -->
+    <link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+    <link rel="shortcut icon" href="%PUBLIC_URL%/favicon.ico" />
+    <link rel="icon" type="image/png" sizes="32x32" href="%PUBLIC_URL%/favicon-32x32.png" />
+    <link rel="icon" type="image/png" sizes="16x16" href="%PUBLIC_URL%/favicon-16x16.png" />
+    
+    <!-- Preconnect to external domains -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="preconnect" href="https://maps.googleapis.com" />
+    <link rel="preconnect" href="https://api.pakride.com" />
+    
+    <!-- DNS Prefetch -->
+    <link rel="dns-prefetch" href="//fonts.googleapis.com" />
+    <link rel="dns-prefetch" href="//maps.googleapis.com" />
+    <link rel="dns-prefetch" href="//api.pakride.com" />
+    
+    <!-- Tailwind CSS CDN (for development) -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    
+    <!-- Custom CSS for loading state -->
+    <style>
+      /* Loading screen */
+      #loading-screen {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(135deg, #16a34a, #059669);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        z-index: 9999;
+        color: white;
+      }
+      
+      .loading-spinner {
+        width: 50px;
+        height: 50px;
+        border: 4px solid rgba(255, 255, 255, 0.3);
+        border-top: 4px solid white;
+        border-radius: 50%;
+        animation: spin 1s linear infinite;
+        margin-bottom: 20px;
+      }
+      
+      @keyframes spin {
+        0% { transform: rotate(0deg); }
+        100% { transform: rotate(360deg); }
+      }
+      
+      .loading-text {
+        font-size: 24px;
+        font-weight: bold;
+        margin-bottom: 10px;
+      }
+      
+      .loading-subtitle {
+        font-size: 16px;
+        opacity: 0.8;
+      }
+      
+      /* Hide loading screen when app loads */
+      body.loaded #loading-screen {
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 0.5s ease-out;
+      }
+      
+      /* Prevent FOUC (Flash of Unstyled Content) */
+      body:not(.loaded) #root {
+        visibility: hidden;
+      }
+      
+      body.loaded #root {
+        visibility: visible;
+      }
+      
+      /* Base styles */
+      body {
+        margin: 0;
+        font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+          'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+          sans-serif;
+        -webkit-font-smoothing: antialiased;
+        -moz-osx-font-smoothing: grayscale;
+        background-color: #f9fafb;
+        overflow-x: hidden;
+      }
+      
+      /* PWA Install Button */
+      .install-prompt {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background: #16a34a;
+        color: white;
+        padding: 12px 24px;
+        border-radius: 25px;
+        border: none;
+        font-weight: 600;
+        box-shadow: 0 4px 20px rgba(22, 163, 74, 0.3);
+        z-index: 1000;
+        display: none;
+        cursor: pointer;
+        transition: all 0.3s ease;
+      }
+      
+      .install-prompt:hover {
+        transform: translateX(-50%) translateY(-2px);
+        box-shadow: 0 6px 25px rgba(22, 163, 74, 0.4);
+      }
+      
+      .install-prompt.show {
+        display: block;
+        animation: slideUp 0.5s ease-out;
+      }
+      
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateX(-50%) translateY(100px);
+        }
+        to {
+          opacity: 1;
+          transform: translateX(-50%) translateY(0);
+        }
+      }
+    </style>
+    
+    <title>PakRide - Your Ride, Your Way</title>
+  </head>
+  <body>
+    <noscript>
+      <div style="text-align: center; padding: 50px; font-family: Arial, sans-serif;">
+        <h1>JavaScript Required</h1>
+        <p>You need to enable JavaScript to run this app.</p>
+        <p>Please enable JavaScript in your browser settings and refresh the page.</p>
+      </div>
+    </noscript>
+    
+    <!-- Loading Screen -->
+    <div id="loading-screen">
+      <div class="loading-spinner"></div>
+      <div class="loading-text">PakRide</div>
+      <div class="loading-subtitle">Loading your ride experience...</div>
+    </div>
+    
+    <!-- Main App -->
+    <div id="root"></div>
+    
+    <!-- PWA Install Prompt -->
+    <button id="install-prompt" class="install-prompt">
+      📱 Install PakRide App
+    </button>
+    
+    <!-- Service Worker Registration -->
+    <script>
+      // Remove loading screen when app loads
+      window.addEventListener('load', function() {
+        setTimeout(() => {
+          document.body.classList.add('loaded');
+        }, 1000);
+      });
+      
+      // PWA Install Prompt
+      let deferredPrompt;
+      const installButton = document.getElementById('install-prompt');
+      
+      window.addEventListener('beforeinstallprompt', (e) => {
+        e.preventDefault();
+        deferredPrompt = e;
+        installButton.classList.add('show');
+      });
+      
+      installButton.addEventListener('click', async () => {
+        if (deferredPrompt) {
+          deferredPrompt.prompt();
+          const { outcome } = await deferredPrompt.userChoice;
+          console.log(`User response to the install prompt: ${outcome}`);
+          deferredPrompt = null;
+          installButton.classList.remove('show');
+        }
+      });
+      
+      // Hide install button if app is already installed
+      window.addEventListener('appinstalled', () => {
+        installButton.classList.remove('show');
+        console.log('PWA was installed');
+      });
+      
+      // Register Service Worker
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js')
+            .then((registration) => {
+              console.log('SW registered: ', registration);
+            })
+            .catch((registrationError) => {
+              console.log('SW registration failed: ', registrationError);
+            });
+        });
+      }
+      
+      // Offline detection
+      window.addEventListener('online', () => {
+        console.log('App is online');
+        // You can add custom logic here
+      });
+      
+      window.addEventListener('offline', () => {
+        console.log('App is offline');
+        // You can add custom logic here
+      });
+    </script>
+  </body>
+</html>

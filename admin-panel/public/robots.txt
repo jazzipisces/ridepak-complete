@@ -1,0 +1,17 @@
+# Admin Panel - Restricted Access
+# This is a private admin interface
+
+User-agent: *
+Disallow: /
+
+# Security notice
+# This admin panel contains sensitive business data
+# Unauthorized access is prohibited
+
+# Allow only specific admin paths for authorized crawlers (if needed)
+# User-agent: AdminBot
+# Allow: /public-reports
+# Disallow: /
+
+# Sitemap (if you have public documentation)
+# Sitemap: https://yourdomain.com/sitemap.xml
